@@ -1,6 +1,7 @@
 package com.bmarohnic.externalstorage;
 
 import android.content.BroadcastReceiver;
+import android.os.Environment;
 
 public class DeviceStorage {
 
@@ -11,6 +12,8 @@ public class DeviceStorage {
 	
 	void updateExternalStorageState()
 	{
+		String state = Environment.getExternalStorageState();
+		
 		
 	}
 }
