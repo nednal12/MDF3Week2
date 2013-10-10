@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MDF3Week2</string>
+    <string name="app_name">Snap To It</string>
     <string name="action_settings">Settings</string>
     <string name="take_picture">Take Picture</string>
+    <string name="set_background_pic">Click the button below to take a photo to use as the background image.</string>
 
 </resources>
