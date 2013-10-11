@@ -1,3 +1,12 @@
+/*
+ * project		SnapToIt
+ * 
+ * package		com.bmarohnic.snaptoit
+ * 
+ * @author		Brent Marohnic
+ * 
+ * date			Oct 10, 2013
+ */
 package com.bmarohn.mdf3week2;
 
 import java.io.File;
@@ -36,6 +45,7 @@ public class PictureActivity extends Activity {
 		
 		String externalStorageState = Environment.getExternalStorageState();
 		
+		// Log out the status of the external storage
 		Log.i("onCreate - External Storage State: ", externalStorageState.toString());
 		
 	}
@@ -50,6 +60,7 @@ public class PictureActivity extends Activity {
 	// Create a file Uri for saving the picture
 	private static Uri getOutputMediaFileUri(int type)
 	{
+		// Return the Uri generated within getOutputMediaFile
 		return Uri.fromFile(getOutputMediaFile(type));
 	}
 	  
@@ -85,31 +96,38 @@ public class PictureActivity extends Activity {
 		// Create an intent to take a picture and then return control to this application
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		
+		// Set pictureUri to the value returned from getOutputMediaFileUri
 		pictureUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 		String stringUri = pictureUri.toString();
 		Log.i("stringUri: ", stringUri);
+		
+		// Provide the location where the camera app should save the image
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, pictureUri);
-		intent.putExtra("uriName", pictureUri);
+		
+		// Start the camera app and request a return value
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 		
 		
 	}
-
+ 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
-		Log.i("onActivityResult", "This is being called");
+		
+		// Check that the image was captured and saved
 		if (resultCode == RESULT_OK)
 		{
-			Log.i("onActivityResult", "This is being called");
+			// Identify the ImageView by id and then set the associated image with the Uri passed into the intent
 			imageView = (ImageView) this.findViewById(R.id.imageView1);
 			imageView.setImageURI(pictureUri);
 			
+			// Set up the notification manager to display a small icon as well as text when the user swipes
+			// the notification area down
 			NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 			Notification notification = new Notification();
 			
 			NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-				.setSmallIcon(R.drawable.ic_launcher)
+				.setSmallIcon(R.drawable.camera_icon)
 				.setContentTitle("Image Saved to External Storage")
 				.setContentText(pictureUri.toString());
 			
